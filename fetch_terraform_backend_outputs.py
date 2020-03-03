@@ -87,9 +87,9 @@ def format_data(data):
     pretty_data = json.loads(data)
     buffer = {}
     result = {}
-    for element in pretty_data['modules']:
+    for element in pretty_data['outputs']:
         buffer = {}
-        buffer = element['outputs']
+        buffer = element
         permanent = buffer.copy()
         permanent.update(buffer)
 
