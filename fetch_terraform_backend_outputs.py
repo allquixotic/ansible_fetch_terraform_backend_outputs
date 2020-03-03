@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright: (c) 2018, Stefan Roman <stefan.roman@katapult.cloud>
+# Copyright: (c) 2018, Stefan Roman <stefan.roman@katapult.cloud>, Sean McNamara <smcnam@gmail.com>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 ANSIBLE_METADATA = {
@@ -115,10 +115,10 @@ def build_client(data, ansible_module):
             aws_access_key_id=aws_access_key,
             aws_secret_access_key=aws_secret_access_key,
             region_name=aws_region)
-    elif not aws_access_key and not aws_secret_access_key:
+    elif not aws_access_key and not aws_secret_access_key and aws_profile:
         return boto3.session.Session(profile_name=aws_profile)
     else:
-        return False
+        return boto3.session.Session()
 
 
 def main():
@@ -133,7 +133,7 @@ def main():
             "type": "str"
         },
         "aws_profile": {
-            "default": "default",
+            "default": "",
             "type": "str"
         },
         "aws_access_key": {
